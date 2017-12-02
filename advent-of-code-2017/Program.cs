@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace advent_of_code_2017
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            //Day1 day1 = new Day1();
+            //day1.Run(args[0]);
+
+            Day2 day2 = new Day2();
+            day2.Run();
         }
     }
 }
