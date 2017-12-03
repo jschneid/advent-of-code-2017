@@ -10,11 +10,16 @@ namespace advent_of_code_2017
     {
         public static void Main(string[] args)
         {
+            Day3 day3 = new Day3();
+            day3.Run();
+
+            //Day2 day2 = new Day2();
+            //day2.Run();
+
             //Day1 day1 = new Day1();
             //day1.Run(args[0]);
 
-            Day2 day2 = new Day2();
-            day2.Run();
+            Console.ReadLine();
         }
     }
 }
