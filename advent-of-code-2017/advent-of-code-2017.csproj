@@ -48,10 +48,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Day4.cs" />
+    <Compile Include="Day5.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="day4input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="day5input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
