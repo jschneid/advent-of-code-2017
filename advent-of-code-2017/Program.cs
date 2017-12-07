@@ -10,8 +10,11 @@ namespace advent_of_code_2017
     {
         public static void Main(string[] args)
         {
-            Day6 day6 = new Day6();
-            day6.Run();
+            Day7 day7 = new Day7();
+            day7.Run();
+
+            //Day6 day6 = new Day6();
+            //day6.Run();
 
             //Day5 day5 = new Day5();
             //day5.Run();
