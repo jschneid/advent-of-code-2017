@@ -9,6 +9,8 @@ namespace advent_of_code_2017
         public void Run()
         {
             Dictionary<string, int> registers = new Dictionary<string, int>();
+            int overallMaxRegisterValue = 0;
+            int currentMaxRegisterValue = 0;
 
             string[] lines = File.ReadAllLines("day8input.txt");
             foreach (string line in lines)
@@ -16,12 +18,16 @@ namespace advent_of_code_2017
                 string[] tokens = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                 if (ShouldPerformOperation(tokens, registers))
                 {
-                    DoOperation(tokens, registers);       
+                    currentMaxRegisterValue = DoOperationAndReturnMax(tokens, registers);
+                    if (currentMaxRegisterValue > overallMaxRegisterValue)
+                    {
+                        overallMaxRegisterValue = currentMaxRegisterValue;
+                    }
                 }
             }
 
-            int maxRegisterValue = registers.Values.Max();
-            Console.WriteLine("Part 1 Solution: " + maxRegisterValue);
+            Console.WriteLine("Part 1 Solution: " + currentMaxRegisterValue);
+            Console.WriteLine("Part 2 Solution: " + overallMaxRegisterValue);
         }
 
         private int GetRegisterValue(string name, Dictionary<string, int> registers)
@@ -64,7 +70,7 @@ namespace advent_of_code_2017
             return performOperation;
         }
 
-        private void DoOperation(string[] tokens, Dictionary<string, int> registers)
+        private int DoOperationAndReturnMax(string[] tokens, Dictionary<string, int> registers)
         {
             int modificationValue = Int32.Parse(tokens[2]);
             int currentRegisterValue = GetRegisterValue(tokens[0], registers);
@@ -79,6 +85,8 @@ namespace advent_of_code_2017
                 default:
                     throw new InvalidOperationException("Unrecognized modifier token: " + tokens[1]);
             }
+            int maxRegisterValue = registers.Values.Max();
+            return maxRegisterValue;
         }
     }
 }
