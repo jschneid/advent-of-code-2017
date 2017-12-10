@@ -2,28 +2,46 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace advent_of_code_2017
 {
     public class Day10
     {
+        /// <summary>
+        /// Solves: http://adventofcode.com/2017/day/10
+        /// </summary>
         public void Run()
         {
             Part1();
+            Part2();
         }
 
         private void Part1()
         {
             int[] lengths = new int[] { 63, 144, 180, 149, 1, 255, 167, 84, 125, 65, 188, 0, 2, 254, 229, 24 };
+            int[] list = InitList();
+
+            int position = 0;
+            int skipSize = 0;
+
+            RunRound(list, lengths, ref position, ref skipSize);
+
+            Console.WriteLine("Part 1 solution: " + list[0] * list[1]);
+        }
+
+        private int[] InitList()
+        {
             int[] list = new int[256];
             for (int i = 0; i < list.Length; i++)
             {
                 list[i] = i;
             }
+            return list;
+        }
 
-            int position = 0;
-            int skipSize = 0;
-
+        private void RunRound(int[] list, int[] lengths, ref int position, ref int skipSize)
+        {
             foreach (int length in lengths)
             {
                 List<int> elementsToReverse = new List<int>();
@@ -46,8 +64,65 @@ namespace advent_of_code_2017
                 position = (position + length + skipSize) % list.Length;
                 skipSize++;
             }
+        }
 
-            Console.WriteLine(list[0] * list[1]);
+        private void Part2()
+        {
+            string input = "63,144,180,149,1,255,167,84,125,65,188,0,2,254,229,24";
+            int[] lengths = ConvertToBytes(input);
+
+            lengths = lengths.Concat(new int[] { 17, 31, 73, 47, 23 }).ToArray();
+
+            int[] list = InitList();
+            int position = 0;
+            int skipSize = 0;
+
+            for (int i = 0; i < 64; i++)
+            {
+                RunRound(list, lengths, ref position, ref skipSize);
+            }
+
+            int[] denseHash = GetDenseHash(list);
+
+            string hexOutput = GetHexOutput(denseHash);
+            Console.WriteLine("Part 2 solution: " + hexOutput);
+        }
+
+        private int[] ConvertToBytes(string input)
+        {
+            int[] lengths = new int[input.Length];
+            int i = 0;
+            foreach (char c in input)
+            {
+                lengths[i] = (byte)c;
+                i++;
+            }
+            return lengths;
+        }
+
+        private int[] GetDenseHash(int[] list)
+        {
+            int[] denseHash = new int[16];
+            for (int i = 0; i < 256; i += 16)
+            {
+                int xoredValue = list[i];
+                for (int j = 1; j < 16; j++)
+                {
+                    xoredValue ^= list[j + i];
+                }
+                denseHash[i / 16] = xoredValue;
+            }
+            return denseHash;
+        }
+
+        private string GetHexOutput(int[] denseHash)
+        {
+            StringBuilder hexOutput = new StringBuilder();
+            for (int i = 0; i < 16; i++)
+            {
+                hexOutput.Append(denseHash[i].ToString("X2"));
+            }
+            return hexOutput.ToString().ToLower();
         }
     }
 }
