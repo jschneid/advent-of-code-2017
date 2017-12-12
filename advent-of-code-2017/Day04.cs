@@ -8,11 +8,11 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves: http://adventofcode.com/2017/day/4
     /// </summary>
-    public class Day4
+    public class Day04
     {
         public void Run()
         {
-            string[] lines = File.ReadAllLines("day4input.txt");
+            string[] lines = File.ReadAllLines("day04input.txt");
 
             int validPassphrasesCountPart1 = 0;
             int validPassphrasesCountPart2 = 0;

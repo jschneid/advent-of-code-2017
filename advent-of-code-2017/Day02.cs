@@ -8,11 +8,11 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves http://adventofcode.com/2017/day/2
     /// </summary>
-    class Day2
+    class Day02
     {
         public void Run()
         {
-            List<List<int>> inputs = ParseInputFile("day2input.txt");
+            List<List<int>> inputs = ParseInputFile("day02input.txt");
 
             DoPart1(inputs);
             DoPart2(inputs);

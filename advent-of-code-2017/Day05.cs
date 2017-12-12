@@ -7,11 +7,11 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves: http://adventofcode.com/2017/day/5
     /// </summary>
-    public class Day5
+    public class Day05
     {
         public void Run()
         {
-            string[] lines = File.ReadAllLines("day5input.txt");
+            string[] lines = File.ReadAllLines("day05input.txt");
 
             List<int> jumps = lines.Select(line => Int32.Parse(line)).ToList();
             int moveCount = Part1(jumps);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 namespace advent_of_code_2017
 {
-    public class Day8
+    public class Day08
     {
         public void Run()
         {
@@ -12,7 +12,7 @@ namespace advent_of_code_2017
             int overallMaxRegisterValue = 0;
             int currentMaxRegisterValue = 0;
 
-            string[] lines = File.ReadAllLines("day8input.txt");
+            string[] lines = File.ReadAllLines("day08input.txt");
             foreach (string line in lines)
             {
                 string[] tokens = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);

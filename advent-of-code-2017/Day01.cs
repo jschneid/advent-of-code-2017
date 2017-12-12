@@ -9,7 +9,7 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves: http://adventofcode.com/2017/day/1
     /// </summary>
-    public class Day1
+    public class Day01
     {
         public void Run(string input)
         {

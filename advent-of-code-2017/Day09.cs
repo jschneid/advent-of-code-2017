@@ -8,11 +8,11 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves http://adventofcode.com/2017/day/9
     /// </summary>
-    public class Day9
+    public class Day09
     {
         public void Run()
         {
-            string input = File.ReadAllText("day9input.txt");
+            string input = File.ReadAllText("day09input.txt");
             int score = Process(input, out int totalNonCanceledGarbageCharCount);
             Console.WriteLine("Part 1 solution: " + score);
             Console.WriteLine("Part 2 solution: " + totalNonCanceledGarbageCharCount);

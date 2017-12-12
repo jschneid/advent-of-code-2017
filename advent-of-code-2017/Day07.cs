@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 namespace advent_of_code_2017
 {
-    public class Day7
+    public class Day07
     {
         public void Run()
         {
@@ -22,7 +22,7 @@ namespace advent_of_code_2017
         {
             List<TowerItem> towerItems = new List<TowerItem>();
 
-            string[] lines = File.ReadAllLines("day7input.txt");
+            string[] lines = File.ReadAllLines("day07input.txt");
             foreach (string line in lines)
             {
                 string name = GetName(line);

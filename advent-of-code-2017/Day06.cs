@@ -6,7 +6,7 @@ namespace advent_of_code_2017
     /// <summary>
     /// Solves: http://adventofcode.com/2017/day/6
     /// </summary>
-    public class Day6
+    public class Day06
     {
         public void Run()
         {
