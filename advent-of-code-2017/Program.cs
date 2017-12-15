@@ -10,7 +10,8 @@ namespace advent_of_code_2017
     {
         public static void Main(string[] args)
         {
-            Day14 day = new Day14();
+            Day15 day = new Day15();
+            //Day14 day = new Day14();
             //Day13 day = new Day13();
             //Day12 day = new Day12();
             //Day11 day = new Day11();
