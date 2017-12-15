@@ -13,13 +13,12 @@ namespace advent_of_code_2017
         /// </summary>
         public void Run()
         {
-            Part1();
-            Part2();
+            Console.WriteLine("Part 1 solution: " + Part1(new int[] { 63, 144, 180, 149, 1, 255, 167, 84, 125, 65, 188, 0, 2, 254, 229, 24 }));
+            Console.WriteLine("Part 2 solution: " + Part2("63,144,180,149,1,255,167,84,125,65,188,0,2,254,229,24"));
         }
 
-        private void Part1()
+        private int Part1(int[] lengths)
         {
-            int[] lengths = new int[] { 63, 144, 180, 149, 1, 255, 167, 84, 125, 65, 188, 0, 2, 254, 229, 24 };
             int[] list = InitList();
 
             int position = 0;
@@ -27,7 +26,7 @@ namespace advent_of_code_2017
 
             RunRound(list, lengths, ref position, ref skipSize);
 
-            Console.WriteLine("Part 1 solution: " + list[0] * list[1]);
+            return list[0] * list[1];
         }
 
         private int[] InitList()
@@ -66,9 +65,8 @@ namespace advent_of_code_2017
             }
         }
 
-        private void Part2()
+        public string Part2(string input)
         {
-            string input = "63,144,180,149,1,255,167,84,125,65,188,0,2,254,229,24";
             int[] lengths = ConvertToBytes(input);
 
             lengths = lengths.Concat(new int[] { 17, 31, 73, 47, 23 }).ToArray();
@@ -85,7 +83,7 @@ namespace advent_of_code_2017
             int[] denseHash = GetDenseHash(list);
 
             string hexOutput = GetHexOutput(denseHash);
-            Console.WriteLine("Part 2 solution: " + hexOutput);
+            return hexOutput;
         }
 
         private int[] ConvertToBytes(string input)
