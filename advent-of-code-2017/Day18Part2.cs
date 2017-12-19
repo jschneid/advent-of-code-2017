@@ -3,45 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-namespace Day18
+namespace advent_of_code_2017
 {
     /// <summary>
-    /// Solves Part 1 of https://adventofcode.com/2017/day/18 ("Duet")
+    /// Solves Part 2 of https://adventofcode.com/2017/day/18 ("Duet")
     /// </summary>
-    public class Day18
+    public class Day18Part2
     {
-        long _lastSoundPlayed;
-        bool _doneProcessing = false;
+        int[] _sendsCount = new int[2];
+        bool[] _programWaiting = new bool[2];
 
         public void Run()
         {
             string[] inputLines = File.ReadAllLines("day18input.txt");
 
-            Console.WriteLine("Part 1 solution: " + Part1(inputLines));
+            Part2(inputLines);
+            Console.WriteLine("Part 2 solution: " + _sendsCount[1]);
         }
 
-        private long Part1(string[] inputLines)
+        private void Part2(string[] inputLines)
         {
-            Dictionary<char, long> registers = new Dictionary<char, long>();
-            long instructionPointer = 0;
+            Dictionary<char, long> registers0 = new Dictionary<char, long>();
+            Dictionary<char, long> registers1 = new Dictionary<char, long>();
+            long instructionPointer0 = 0;
+            long instructionPointer1 = 0;
+            List<long> queue0 = new List<long>();
+            List<long> queue1 = new List<long>();
+
+            registers1['p'] = 1;
 
             while (true)
             {
-                instructionPointer = Process(inputLines[instructionPointer], registers, instructionPointer);
-                if (_doneProcessing)
+                instructionPointer0 = Process(inputLines[instructionPointer0], registers0, instructionPointer0, 0, queue0, queue1);
+                if (instructionPointer0 < 0 || instructionPointer0 >= inputLines.Length || BothWaiting())
                 {
-                    return _lastSoundPlayed;
+                    return;
+                }
+
+                instructionPointer1 = Process(inputLines[instructionPointer1], registers1, instructionPointer1, 1, queue1, queue0);
+                if (instructionPointer1 < 0 || instructionPointer1 >= inputLines.Length || BothWaiting())
+                {
+                    return;
                 }
             }
         }
 
-        private long Process(string inputLine, Dictionary<char, long> registers, long instructionPointer)
+        private bool BothWaiting()
+        {
+            return (_programWaiting[0] && _programWaiting[1]);
+        }
+
+        private long Process(string inputLine, Dictionary<char, long> registers, long instructionPointer, int programID, List<long> myQueue, List<long> otherProgramQueue)
         {
             Instruction instruction = new Instruction(inputLine);
+            _programWaiting[programID] = false;
             switch (instruction.Operation)
             {
                 case "snd":
-                    _lastSoundPlayed = instruction.GetArgumentValue(0, registers);
+                    otherProgramQueue.Add(instruction.GetArgumentValue(0, registers));
+                    _sendsCount[programID]++;
                     break;
 
                 case "set":
@@ -61,9 +81,15 @@ namespace Day18
                     break;
 
                 case "rcv":
-                    if (instruction.GetArgumentValue(0, registers) != 0)
+                    if (myQueue.Count > 0)
                     {
-                        _doneProcessing = true;
+                        registers[instruction.ArgRegister[0]] = myQueue[0];
+                        myQueue.RemoveAt(0);
+                    }
+                    else
+                    {
+                        _programWaiting[programID] = true;
+                        return instructionPointer;
                     }
                     break;
 
@@ -136,7 +162,7 @@ namespace Day18
             }
             else
             {
-                return Day18.GetExistingOrNewRegister(ArgRegister[argumentNumber], registers);
+                return Day18Part2.GetExistingOrNewRegister(ArgRegister[argumentNumber], registers);
             }
         }
     }
