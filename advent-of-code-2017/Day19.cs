@@ -12,16 +12,17 @@ namespace advent_of_code_2017
     public class Day19
     {
         string[] _inputLines;
+        int _steps;
 
         public void Run()
         {
             _inputLines = File.ReadAllLines("day19input.txt");
 
-
-            Console.WriteLine("Part 1 solution: " + Part1());
-
+            Console.WriteLine("Part 1 solution: " + Traverse());
+            Console.WriteLine("Part 2 solution: " + _steps);
         }
-        private string Part1()
+
+        private string Traverse()
         {
             StringBuilder solution = new StringBuilder();
             int x = _inputLines[0].IndexOf('|');
@@ -34,13 +35,17 @@ namespace advent_of_code_2017
                 {
                     case '|':
                         Continue(ref x, ref y, direction);
+                        _steps++;
                         break;
+
                     case '-':
                         Continue(ref x, ref y, direction);
+                        _steps++;
                         break;
 
                     case '+':
                         Turn(ref x, ref y, ref direction);
+                        _steps++;
                         break;
 
                     case ' ':
@@ -52,8 +57,8 @@ namespace advent_of_code_2017
                     default: // A letter
                         solution.Append(CharAt(x, y));
                         Continue(ref x, ref y, direction);
+                        _steps++;
                         break;
-                            
                 }
             }
         }
@@ -68,7 +73,6 @@ namespace advent_of_code_2017
 
             return _inputLines[y][x];
         }
-
 
         private void Continue(ref int x, ref int y, int direction)
         {
