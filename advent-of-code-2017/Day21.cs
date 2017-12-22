@@ -19,6 +19,7 @@ namespace advent_of_code_2017
             PopulateEnhancementRules(inputLines);
 
             Console.WriteLine("Part 1 solution: " + Part1());
+            Console.WriteLine("Part 2 solution: " + Part2());
         }
 
         private void PopulateEnhancementRules(string[] inputLines)
@@ -144,6 +145,19 @@ namespace advent_of_code_2017
 
             return GetOnPixelCount(art);
         }
+
+        private int Part2()
+        {
+            char[,] art = GetInitialArt();
+
+            for (int i = 0; i < 18; i++)
+            {
+                art = Enhance(art);
+            }
+
+            return GetOnPixelCount(art);
+        }
+
 
         private int GetOnPixelCount(char[,] art)
         {
