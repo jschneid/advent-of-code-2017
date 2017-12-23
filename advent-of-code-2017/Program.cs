@@ -10,7 +10,7 @@ namespace advent_of_code_2017
     {
         public static void Main(string[] args)
         {
-            var day = new Day22Part2();
+            var day = new Day23();
 
             day.Run();
 

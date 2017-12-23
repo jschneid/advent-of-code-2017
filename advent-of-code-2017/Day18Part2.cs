@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-namespace advent_of_code_2017
+namespace Day18Part2
 {
     /// <summary>
     /// Solves Part 2 of https://adventofcode.com/2017/day/18 ("Duet")
