@@ -72,6 +72,7 @@
     <Compile Include="Day22Part2.cs" />
     <Compile Include="Day23.cs" />
     <Compile Include="Day24.cs" />
+    <Compile Include="Day24Part2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

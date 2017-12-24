@@ -4,24 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace day_24_part_1
+namespace advent_of_code_2017
 {
     /// <summary>
-    /// Solves http://adventofcode.com/2017/day/24 ("Electromagnetic Moat") Part 1
+    /// Solves http://adventofcode.com/2017/day/24 ("Electromagnetic Moat") Part 2
     /// </summary>
-    public class Day24
+    public class Day24Part2
     {
         public void Run()
         {
-            Console.WriteLine("Part 1 solution: " + Part1());
+            Console.WriteLine("Part 2 solution: " + Part2());
         }
 
-        private int Part1()
+        private int Part2()
         {
             List<Component> availableComponents = ParseInput();
             Bridge bridge = new Bridge();
+            List<Tuple<int, int>> lengthsAndStrengths = new List<Tuple<int, int>>();
 
-            return Build(bridge, availableComponents);
+            Build(bridge, availableComponents, lengthsAndStrengths);
+
+            return GetLongestStrongest(lengthsAndStrengths);
         }
 
         private List<Component> ParseInput()
@@ -52,28 +55,28 @@ namespace day_24_part_1
             return possibleNextComponents;
         }
 
-        private int Build(Bridge bridge, List<Component> components)
+        private void Build(Bridge bridge, List<Component> components, List<Tuple<int, int>> lengthsAndStrengths)
         {
             List<Component> possibleNextComponents = GetPossibleNextComponents(bridge, components);
             if (possibleNextComponents.Count == 0)
             {
-                return bridge.Strength();
+                Tuple<int, int> lengthAndStrength = new Tuple<int, int>(bridge.Length(), bridge.Strength());
+                lengthsAndStrengths.Add(lengthAndStrength);
             }
 
-            int maxStrength = 0;
             foreach (Component component in possibleNextComponents)
             {
                 bridge.Add(component);
-
-                int strength = Build(bridge, components);
-                if (strength > maxStrength)
-                {
-                    maxStrength = strength;
-                }
-
+                Build(bridge, components, lengthsAndStrengths);
                 bridge.RemoveLast();
             }
+        }
 
+        private int GetLongestStrongest(List<Tuple<int, int>> lengthsAndStrengths)
+        {
+            int maxLength = lengthsAndStrengths.Max(lengthAndStrength => lengthAndStrength.Item1);
+            List<Tuple<int, int>> longest = lengthsAndStrengths.Where(lengthAndStrength => lengthAndStrength.Item1 == maxLength).ToList();
+            int maxStrength = longest.Max(lengthAndStrength => lengthAndStrength.Item2);
             return maxStrength;
         }
     }
@@ -142,6 +145,11 @@ namespace day_24_part_1
         public int Strength()
         {
             return _components.Sum(c => c.Strength());
+        }
+
+        public int Length()
+        {
+            return _components.Count();
         }
     }
 }
