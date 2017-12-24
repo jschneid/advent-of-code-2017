@@ -71,6 +71,7 @@
     <Compile Include="Day22.cs" />
     <Compile Include="Day22Part2.cs" />
     <Compile Include="Day23.cs" />
+    <Compile Include="Day24.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -111,6 +112,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="day23input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="day24input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
