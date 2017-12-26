@@ -26,7 +26,7 @@ namespace day_24_part_1
 
         private List<Component> ParseInput()
         {
-            string[] inputLines = File.ReadAllLines("day24input.txt");
+                string[] inputLines = File.ReadAllLines("day24input.txt");
 
             List<Component> availableComponents = new List<Component>();
 
